@@ -17,6 +17,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'ItemController@index')->name('index');
 Route::get('/item/detail/{id}', 'ItemController@detail')->name('detail');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin'], function() {
+	Route::get('/', function () { return redirect('/admin/home'); });
+	Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
+	Route::post('login', 'Admin\LoginController@login');
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+	Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
+	Route::get('home', 'Admin\HomeController@index')->name('admin.home');
+});
