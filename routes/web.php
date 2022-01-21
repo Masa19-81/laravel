@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/', 'ItemController@index')->name('index');
@@ -30,4 +26,10 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
 	Route::get('home', 'Admin\HomeController@index')->name('admin.home');
+	Route::get('index', 'Admin\ItemController@index')->name('admin.index');
+	Route::get('detail/{id}', 'Admin\ItemController@detail')->name('admin.detail');
+	Route::get('edit/{id}', 'Admin\ItemController@edit')->name('admin.edit');
+	Route::post('edit', 'Admin\ItemController@update')->name('admin.update');
+	Route::get('add', function () { return view('admin.add'); })->name('admin.add');
+	Route::post('add', 'Admin\ItemController@add')->name('admin.add_post');
 });
