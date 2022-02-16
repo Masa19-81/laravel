@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in!
+					<br>
+					<a href="{{ route('index') }}">商品一覧ページへ移動</a>
                 </div>
             </div>
         </div>

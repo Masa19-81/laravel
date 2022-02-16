@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<title>商品一覧</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+@if (session('message'))
+<h3>{{ session('message') }}</h3>
+@endif
 <h1>商品一覧</h1>
-<table border="1">
+<table border="1" style="font-size : 20px">
 <tr>
 <th>商品名</th>
 <th>値段</th>
@@ -14,8 +13,8 @@
 </tr>
 @foreach ($items as $item)
 <tr>
-<td><a href="{{route('detail', ['id' => $item->id])}}">{{$item->name}}</a></td>
-<td>{{$item->price}}</td>
+<td><a href="{{ route('detail', ['id' => $item->id]) }}">{{$item->name}}</a></td>
+<td>{{ $item->price }}円</td>
 @if ($item->inventory == 0)
 <td>在庫無し</td>
 @else
@@ -24,5 +23,6 @@
 </tr>
 @endforeach
 </table>
-</body>
-</html>
+<br>
+<h3><a href="{{ route('cart.index') }}">カート情報</a></h3>
+@endsection
