@@ -23,6 +23,16 @@ Route::group(['prefix' => 'cart', 'middleware' => 'auth:user'], function() {
 	Route::post('delete', 'Auth\CartController@delete')->name('cart.delete');
 });
 
+Route::group(['prefix' => 'address', 'middleware' => 'auth:user'], function() {
+	Route::get('index', 'Auth\UserAddressController@index')->name('address.index');
+	Route::get('select', 'Auth\UserAddressController@select')->name('address.select');
+	Route::get('add', function () { return view('address.add'); })->name('address.add');
+	Route::post('add', 'Auth\UserAddressController@add')->name('address.add_post');
+	Route::get('edit/{id}', 'Auth\UserAddressController@edit')->name('address.edit');
+	Route::post('edit', 'Auth\UserAddressController@update')->name('address.update');
+	Route::post('delete', 'Auth\UserAddressController@delete')->name('address.delete');
+});
+
 Route::group(['prefix' => 'admin'], function() {
 	Route::get('/', function () { return redirect('/admin/home'); });
 	Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');

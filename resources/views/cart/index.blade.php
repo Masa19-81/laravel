@@ -34,5 +34,6 @@
 </table>
 <h3>合計金額:{{ $total }}円</h3>
 @endif
+<button onclick="location.href='{{ route("address.select") }}'">お届け先選択</button>
 <h3><a href="{{ route('index') }}">商品一覧へ戻る</a></h3>
 @endsection

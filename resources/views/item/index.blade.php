@@ -24,5 +24,6 @@
 @endforeach
 </table>
 <br>
+<h3><a href="{{ route('address.index') }}">お届け先住所一覧</a></h3>
 <h3><a href="{{ route('cart.index') }}">カート情報</a></h3>
 @endsection
